@@ -25,7 +25,7 @@ export default class Changelog {
     this.github = new GithubAPI(this.config);
     this.renderer = new MarkdownRenderer({
       categories: Object.keys(this.config.labels).map(key => this.config.labels[key]),
-      baseIssueUrl: this.github.getBaseIssueUrl(this.config.repo),
+      baseIssueUrl: this.github.getBaseIssueUrl(this.config.repo, this.config.githubServer),
       unreleasedName: this.config.nextVersion || "Unreleased",
     });
   }
@@ -108,7 +108,7 @@ export default class Changelog {
       // check if the current committer should be kept or not.
       const shouldKeepCommiter = login && !this.ignoreCommitter(login);
       if (login && shouldKeepCommiter && !committers[login]) {
-        committers[login] = await this.github.getUserData(login);
+        committers[login] = await this.github.getUserData(login, this.config.githubServer);
       }
     }
 
@@ -155,7 +155,7 @@ export default class Changelog {
       commitInfos,
       async (commitInfo: CommitInfo) => {
         if (commitInfo.issueNumber) {
-          commitInfo.githubIssue = await this.github.getIssueData(this.config.repo, commitInfo.issueNumber);
+          commitInfo.githubIssue = await this.github.getIssueData(this.config.repo, commitInfo.issueNumber, this.config.githubServer);
         }
 
         progressBar.tick();

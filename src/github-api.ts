@@ -42,16 +42,16 @@ export default class GithubAPI {
     }
   }
 
-  public getBaseIssueUrl(repo: string): string {
-    return `https://github.com/${repo}/issues/`;
+  public getBaseIssueUrl(repo: string, githubServer: string): string {
+    return `https://${githubServer}/${repo}/issues/`;
   }
 
-  public async getIssueData(repo: string, issue: string): Promise<GitHubIssueResponse> {
-    return this._fetch(`https://api.github.com/repos/${repo}/issues/${issue}`);
+  public async getIssueData(repo: string, issue: string, githubServer: string): Promise<GitHubIssueResponse> {
+    return this._fetch(`https://api.${githubServer}/repos/${repo}/issues/${issue}`);
   }
 
-  public async getUserData(login: string): Promise<GitHubUserResponse> {
-    return this._fetch(`https://api.github.com/users/${login}`);
+  public async getUserData(login: string, githubServer: string): Promise<GitHubUserResponse> {
+    return this._fetch(`https://api.${githubServer}/users/${login}`);
   }
 
   private async _fetch(url: string): Promise<any> {

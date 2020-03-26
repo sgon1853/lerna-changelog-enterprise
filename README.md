@@ -112,6 +112,8 @@ The supported options are:
 - `repo`: Your "org/repo" on GitHub
   (automatically inferred from the `package.json` file)
 
+- `githubServer`: In case if you are using github enterprise
+
 - `nextVersion`: Title for unreleased commits
   (e.g. `Unreleased`)
 

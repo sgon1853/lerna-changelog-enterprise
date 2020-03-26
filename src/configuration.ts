@@ -7,6 +7,7 @@ import ConfigurationError from "./configuration-error";
 
 export interface Configuration {
   repo: string;
+  githubServer: string;
   rootPath: string;
   labels: { [key: string]: string };
   ignoreCommitters: string[];
@@ -31,13 +32,18 @@ export function fromPath(rootPath: string, options: ConfigLoaderOptions = {}): C
   let config = fromPackageConfig(rootPath) || fromLernaConfig(rootPath) || {};
 
   // Step 2: fill partial config with defaults
-  let { repo, nextVersion, labels, cacheDir, ignoreCommitters } = config;
+  let { repo, nextVersion, labels, cacheDir, ignoreCommitters, githubServer } = config;
 
   if (!repo) {
     repo = findRepo(rootPath);
     if (!repo) {
       throw new ConfigurationError('Could not infer "repo" from the "package.json" file.');
     }
+  }
+
+  if (!githubServer) {
+    
+    githubServer = 'github.com'
   }
 
   if (options.nextVersionFromMetadata || config.nextVersionFromMetadata) {
@@ -76,6 +82,7 @@ export function fromPath(rootPath: string, options: ConfigLoaderOptions = {}): C
     labels,
     ignoreCommitters,
     cacheDir,
+    githubServer
   };
 }
 
