@@ -106,6 +106,8 @@ The supported options are:
 
 - `githubServer`: In case if you are using github enterprise
 
+- `githubServerStrictSSL`:  Whether to use strictssl when connecting to githubserver. In case it does not have a valid certificate. Corresponds to rejectUnauthorized. If not false, the server certificate is verified against the list of supplied CAs. An 'error' event is emitted if verification fails; err.code contains the OpenSSL error code. Default: true.
+
 - `nextVersion`: Title for unreleased commits
   (e.g. `Unreleased`)
 
@@ -116,7 +118,6 @@ The supported options are:
 
 - `cacheDir`: Path to a GitHub API response cache to avoid throttling
   (e.g. `.changelog`)
-
 
 License
 ------------------------------------------------------------------------------
