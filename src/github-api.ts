@@ -64,7 +64,7 @@ export default class GithubAPI {
       headers: {
         Authorization: `token ${this.auth}`,
       },
-      rejectUnauthorized: this.strictSSL,
+      strictSSL: this.strictSSL,
     });
     const parsedResponse = await res.json();
     if (res.ok) {
