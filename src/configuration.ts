@@ -42,8 +42,7 @@ export function fromPath(rootPath: string, options: ConfigLoaderOptions = {}): C
   }
 
   if (!githubServer) {
-    
-    githubServer = 'github.com'
+    githubServer = "github.com";
   }
 
   if (options.nextVersionFromMetadata || config.nextVersionFromMetadata) {
@@ -82,7 +81,7 @@ export function fromPath(rootPath: string, options: ConfigLoaderOptions = {}): C
     labels,
     ignoreCommitters,
     cacheDir,
-    githubServer
+    githubServer,
   };
 }
 

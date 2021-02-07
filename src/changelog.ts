@@ -155,7 +155,11 @@ export default class Changelog {
       commitInfos,
       async (commitInfo: CommitInfo) => {
         if (commitInfo.issueNumber) {
-          commitInfo.githubIssue = await this.github.getIssueData(this.config.repo, commitInfo.issueNumber, this.config.githubServer);
+          commitInfo.githubIssue = await this.github.getIssueData(
+            this.config.repo,
+            commitInfo.issueNumber,
+            this.config.githubServer
+          );
         }
 
         progressBar.tick();

@@ -2,7 +2,7 @@ import { Configuration } from "../configuration";
 
 const Changelog = require.requireActual("../changelog").default;
 
-const defaultConfig = {
+const defaultConfig: Configuration = {
   rootPath: "../",
   repo: "lerna/lerna-changelog",
   labels: {
@@ -16,6 +16,7 @@ const defaultConfig = {
   ignoreCommitters: [],
   cacheDir: ".changelog",
   nextVersion: "Unreleased",
+  githubServer: "github.com",
 };
 
 class MockedChangelog extends Changelog {
