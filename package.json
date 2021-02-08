@@ -23,6 +23,7 @@
   "scripts": {
     "build": "npm run clean && tsc",
     "changelog": "node ./bin/cli.js",
+    "changelog:ts": "npx ts-node ./src/cli.ts",
     "clean": "rimraf lib",
     "fix": "npm run lint -- --fix",
     "lint": "eslint src --ext ts --format stylish",
@@ -36,6 +37,7 @@
     "chalk": "^2.4.1",
     "cli-highlight": "^2.1.4",
     "execa": "^1.0.0",
+    "fs-extra": "^8.1.0",
     "hosted-git-info": "^3.0.4",
     "make-fetch-happen": "8.0.13",
     "p-map": "^3.0.0",
@@ -43,6 +45,7 @@
     "yargs": "^13.0.0"
   },
   "devDependencies": {
+    "@types/fs-extra": "9.0.6",
     "@types/jest": "^25.1.4",
     "@types/node": "^12.12.21",
     "@typescript-eslint/eslint-plugin": "^2.23.0",
@@ -50,12 +53,12 @@
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-prettier": "^3.1.2",
-    "fs-extra": "^8.1.0",
     "jest": "^25.1.0",
     "jest-runner-eslint": "^0.7.6",
     "prettier": "1.19.1",
     "rimraf": "^3.0.2",
     "ts-jest": "^25.2.1",
+    "ts-node": "9.1.1",
     "typescript": "^3.8.3"
   },
   "engines": {
@@ -73,8 +76,7 @@
     "cacheDir": ".changelog"
   },
   "jest": {
-    "projects": [
-      {
+    "projects": [{
         "displayName": "test",
         "roots": [
           "src"

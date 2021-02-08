@@ -7,6 +7,7 @@ import { highlight } from "cli-highlight";
 import Changelog from "./changelog";
 import { load as loadConfig } from "./configuration";
 import ConfigurationError from "./configuration-error";
+import { writeFile } from "fs-extra";
 
 export async function run() {
   const yargs = require("yargs");
@@ -82,6 +83,9 @@ export async function run() {
     });
 
     console.log(highlighted);
+
+    writeFile("CHANGELOG.md", result);
+
   } catch (e) {
     if (e instanceof ConfigurationError) {
       console.log(chalk.red(e.message));
