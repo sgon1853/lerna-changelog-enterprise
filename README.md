@@ -113,6 +113,8 @@ The supported options are:
 
 - `labels`: GitHub PR labels mapped to changelog section headers
 
+- `prTitleFilters`: Filters to match GitHub PR title (Useful when no labels are used in PRs)
+
 - `ignoreCommitters`: List of committers to ignore (exact or partial match).
   Useful for example to ignore commits from bots.
 

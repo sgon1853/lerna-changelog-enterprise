@@ -17,6 +17,7 @@ const defaultConfig: Configuration = {
   cacheDir: ".changelog",
   nextVersion: "Unreleased",
   githubServer: "github.com",
+  prTitleFilters: [],
 };
 
 class MockedChangelog extends Changelog {

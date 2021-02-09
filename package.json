@@ -66,6 +66,8 @@
   },
   "changelog": {
     "repo": "lerna/lerna-changelog",
+    "ShowPRsWithNoLabels": true,
+    "prTitleFilters": ["Bump"],
     "labels": {
       "breaking": ":boom: Breaking Change",
       "enhancement": ":rocket: Enhancement",
