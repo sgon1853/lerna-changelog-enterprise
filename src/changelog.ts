@@ -24,7 +24,10 @@ export default class Changelog {
     this.config = config;
     this.github = new GithubAPI(this.config);
     this.renderer = new MarkdownRenderer({
-      categories: Object.keys(this.config.labels).map(key => this.config.labels[key]),
+      categories: [
+        ...Object.keys(this.config.labels).map(key => this.config.labels[key]),
+        ...this.config.prTitleFilters,
+      ],
       baseIssueUrl: this.github.getBaseIssueUrl(this.config.repo, this.config.githubServer),
       unreleasedName: this.config.nextVersion || "Unreleased",
     });
@@ -206,13 +209,28 @@ export default class Changelog {
 
   private fillInCategories(commits: CommitInfo[]) {
     for (const commit of commits) {
-      if (!commit.githubIssue || !commit.githubIssue.labels) continue;
+      if (!commit.githubIssue) continue;
+
+      let categories: string[] = [];
+      if (this.config.prTitleFilters && this.config.prTitleFilters.length !== 0) {
+        categories = this.config.prTitleFilters
+          .filter(
+            titleFilter =>
+              commit.githubIssue && commit.githubIssue.title.toLowerCase().indexOf(titleFilter.toLowerCase()) !== -1
+          )
+          .map(titleFilter => titleFilter);
+      }
+
+      if (!commit.githubIssue.labels) continue;
 
       const labels = commit.githubIssue.labels.map(label => label.name.toLowerCase());
 
-      commit.categories = Object.keys(this.config.labels)
-        .filter(label => labels.indexOf(label.toLowerCase()) !== -1)
-        .map(label => this.config.labels[label]);
+      commit.categories = [
+        ...categories,
+        ...Object.keys(this.config.labels)
+          .filter(label => labels.indexOf(label.toLowerCase()) !== -1)
+          .map(label => this.config.labels[label]),
+      ];
     }
   }
 

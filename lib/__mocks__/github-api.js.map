@@ -1,0 +1,1 @@
+{"version":3,"file":"github-api.js","sourceRoot":"","sources":["../../src/__mocks__/github-api.ts"],"names":[],"mappings":";;AAAA,MAAM,SAAS,GAAG,OAAO,CAAC,aAAa,CAAC,eAAe,CAAC,CAAC,OAAO,CAAC;AAEjE,MAAM,eAAgB,SAAQ,SAAS;IAC7B,YAAY;QAClB,OAAO,KAAK,CAAC;IACf,CAAC;CACF;AAED,kBAAe,eAAe,CAAC"}

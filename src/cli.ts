@@ -85,7 +85,6 @@ export async function run() {
     console.log(highlighted);
 
     writeFile("CHANGELOG.md", result);
-
   } catch (e) {
     if (e instanceof ConfigurationError) {
       console.log(chalk.red(e.message));

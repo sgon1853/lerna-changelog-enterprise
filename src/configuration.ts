@@ -15,6 +15,7 @@ export interface Configuration {
   nextVersion: string | undefined;
   nextVersionFromMetadata?: boolean;
   githubServerStrictSSL?: boolean;
+  prTitleFilters: string[];
 }
 
 export interface ConfigLoaderOptions {
@@ -33,7 +34,16 @@ export function fromPath(rootPath: string, options: ConfigLoaderOptions = {}): C
   let config = fromPackageConfig(rootPath) || fromLernaConfig(rootPath) || {};
 
   // Step 2: fill partial config with defaults
-  let { repo, nextVersion, labels, cacheDir, ignoreCommitters, githubServer, githubServerStrictSSL } = config;
+  let {
+    repo,
+    nextVersion,
+    labels,
+    cacheDir,
+    ignoreCommitters,
+    githubServer,
+    githubServerStrictSSL,
+    prTitleFilters,
+  } = config;
 
   if (!repo) {
     repo = findRepo(rootPath);
@@ -75,6 +85,10 @@ export function fromPath(rootPath: string, options: ConfigLoaderOptions = {}): C
     ];
   }
 
+  if (!prTitleFilters) {
+    prTitleFilters = [];
+  }
+
   return {
     repo,
     nextVersion,
@@ -84,6 +98,7 @@ export function fromPath(rootPath: string, options: ConfigLoaderOptions = {}): C
     cacheDir,
     githubServer,
     githubServerStrictSSL,
+    prTitleFilters,
   };
 }
 
